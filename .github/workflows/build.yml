@@ -46,8 +46,12 @@ jobs:
           mkdir build
           cd build
           ${{ matrix.cxx-override }} \
-          cmake -DCMAKE_BUILD_TYPE=${{ matrix.mode }} ..
+          cmake -DCMAKE_BUILD_TYPE=${{ matrix.mode }} -DUTILS_BUILD_TESTS=ON ..
 
       - name: Build
         working-directory: build
         run: cmake --build . --config ${{ matrix.mode }}
+
+      - name: Run tests
+        working-directory: build/tests
+        run: ctest

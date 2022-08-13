@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-find utils app -name "*.cpp" -or -name "*.hpp" | xargs clang-format -i --verbose
+find utils tests -name "*.cpp" -or -name "*.hpp" | xargs clang-format -i --verbose

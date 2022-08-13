@@ -9,3 +9,4 @@ add_library(
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE include)
+target_compile_options(${PROJECT_NAME} PRIVATE ${PROJECT_WARNINGS})
