@@ -23,9 +23,9 @@
 
 namespace utils::detail {
 /**
-     * Run a functor when on scope exit.
-     * Intended to be used with the `ON_SCOPE_EXIT` macro.
-     */
+ * Run a functor when on scope exit.
+ * Intended to be used with the `ON_SCOPE_EXIT` macro.
+ */
 template<typename Func>
 class ScopeExitFunctor final
 {
