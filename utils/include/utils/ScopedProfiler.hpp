@@ -48,7 +48,8 @@ private:
 }  // namespace utils
 
 #if UTILS_WITH_SCOPED_PROFILER
-    #define UTILS_SCOPED_PROFILER(x) const utils::ScopedProfiler UTILS_STRCAT(_SCOPED_PROFILER_, __COUNTER__)(x)
+    #define UTILS_SCOPED_PROFILER(x) \
+        [[maybe_unused]] const utils::ScopedProfiler UTILS_STRCAT(_SCOPED_PROFILER_, __COUNTER__)(x)
 #else
     #define UTILS_SCOPED_PROFILER(x) (void) 0
 #endif

@@ -80,8 +80,8 @@ namespace detail {
 /**
  * Executes a lambda when the scope exits.
  */
-#define ON_SCOPE_EXIT                                          \
-    const auto& UTILS_STRCAT(_SCOPE_EXIT_FUNC_, __COUNTER__) = \
+#define ON_SCOPE_EXIT                                                           \
+    const auto& UTILS_STRCAT(_SCOPE_EXIT_FUNC_, __COUNTER__) [[maybe_unused]] = \
       utils::detail::ScopeExitHelper{} + [&]()  // NOLINT(bugprone-macro-parentheses)
 
 }  // namespace utils
