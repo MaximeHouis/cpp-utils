@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2021 [fill name later]
+ * Copyright (c) 2022-2022 [fill name later]
  *
  * This software is provided "as-is", without any express or implied warranty. In no event
  *     will the authors be held liable for any damages arising from the use of this software.
@@ -19,11 +19,32 @@
 
 #pragma once
 
-/**
- * Forces a compile error and shows the type of a variable.
- * Useful tool when searching for an auto type or deep library calls.
- * Inspired from Scott Meyers' Effective C++ book.
- * @tparam T Type you are looking for, use decltype of the variable to detect it.
- */
-template<typename T>
-class [[maybe_unused]] TypeChecker;
+#include <utils/Macros.hpp>
+#include <utils/Time.hpp>
+
+#include <chrono>
+#include <utility>
+
+namespace utils {
+class ScopedProfiler final
+{
+public:
+    explicit ScopedProfiler(const char* name) noexcept;
+    ~ScopedProfiler();
+
+    ScopedProfiler(ScopedProfiler&&) = delete;
+    ScopedProfiler(const ScopedProfiler&) = delete;
+    ScopedProfiler& operator=(ScopedProfiler&&) = delete;
+    ScopedProfiler& operator=(const ScopedProfiler&) = delete;
+
+private:
+    const TimePoint m_start;
+    const char* const m_name;
+};
+}  // namespace utils
+
+#if UTILS_WITH_SCOPED_PROFILER
+    #define UTILS_SCOPED_PROFILER(x) const utils::ScopedProfiler UTILS_STRCAT(_SCOPED_PROFILER_, __COUNTER__)(x)
+#else
+    #define UTILS_SCOPED_PROFILER(x) (void) 0
+#endif

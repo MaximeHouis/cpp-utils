@@ -17,13 +17,13 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-#include <iostream>
+#include <utils/ScopedProfiler.hpp>
 
-#include "lib/ScopedProfiler.hpp"
+#include <iostream>
 
 int main()
 {
-    CPPTEMPLATE_SCOPED_PROFILER("main()");
+    UTILS_SCOPED_PROFILER("main()");
 
     std::cout << "Hello world!\n";
 }

@@ -1,6 +1,5 @@
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
-    # template: enable if using std::execution with gcc or clang
-    #    link_libraries(tbb)
+    link_libraries(tbb)
 endif ()
 
 if (MSVC)

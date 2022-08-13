@@ -19,11 +19,13 @@
 
 #pragma once
 
-#include <chrono>
-
-namespace cpptemplate {
-using Clock = std::chrono::high_resolution_clock;
-using TimePoint = decltype(Clock::now());
-using DurationSeconds = std::chrono::duration<float>;
-using DurationMillis = std::chrono::duration<float, std::milli>;
-}  // namespace cpptemplate
+namespace utils {
+/**
+ * Forces a compile error and shows the type of a variable.
+ * Useful tool when searching for an auto type or deep library calls.
+ * Inspired from Scott Meyers' Effective C++ book.
+ * @tparam T Type you are looking for, use decltype of the variable to detect it.
+ */
+template<typename T>
+class [[maybe_unused]] TypeChecker;
+}  // namespace utils

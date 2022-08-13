@@ -1,12 +1,9 @@
 cmake_minimum_required(VERSION 3.16)
-project(cpp-template LANGUAGES C CXX)
+project(cpp-utils LANGUAGES C CXX)
 
 set(CMAKE_VERBOSE_MAKEFILE OFF) # turn on to debug Makefile builds
 
-# template: change to your project name, will be used for #define prefixes
-#  example: CPPTEMPLATE will be used for CPPTEMPLATE_DEBUG=X, CPPTEMPLATE_FOO=BAR, ...
-# FIXME: (in your project), find and replace all instances of 'CPPTEMPLATE' to your desired prefix
-set(PROJECT_PREFIX CPPTEMPLATE)
+set(PROJECT_PREFIX UTILS)
 
 if (NOT "${CMAKE_CXX_STANDARD}")
     set(CMAKE_CXX_STANDARD 20)
@@ -32,5 +29,5 @@ if (${CMAKE_BUILD_TYPE} MATCHES "Release" AND ${${PROJECT_PREFIX}_ENABLE_IPO})
     endif ()
 endif ()
 
-add_subdirectory(lib)
+add_subdirectory(utils)
 add_subdirectory(app)

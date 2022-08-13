@@ -17,15 +17,15 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-#include "lib/ScopedProfiler.hpp"
+#include <utils/ScopedProfiler.hpp>
 
 #include <iostream>
 
-cpptemplate::ScopedProfiler::ScopedProfiler(const char* name) noexcept : m_start{Clock::now()}, m_name{name}
+utils::ScopedProfiler::ScopedProfiler(const char* name) noexcept : m_start{Clock::now()}, m_name{name}
 {
 }
 
-cpptemplate::ScopedProfiler::~ScopedProfiler()
+utils::ScopedProfiler::~ScopedProfiler()
 {
     const auto end = Clock::now();
     const DurationSeconds durationSeconds = end - m_start;

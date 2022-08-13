@@ -17,17 +17,17 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-#include "lib/FrameManager.hpp"
+#include <utils/FrameManager.hpp>
 
 #include <sstream>
 
 using namespace std::chrono_literals;
 
-cpptemplate::FrameManager::FrameManager() : m_lastFrame{Clock::now()}
+utils::FrameManager::FrameManager() : m_lastFrame{Clock::now()}
 {
 }
 
-void cpptemplate::FrameManager::update() noexcept
+void utils::FrameManager::update() noexcept
 {
     const auto timePoint = Clock::now();
 
@@ -52,7 +52,7 @@ void cpptemplate::FrameManager::update() noexcept
 }
 
 // TODO: There is probably a more optimal way of doing this
-cpptemplate::FrameManager::FramerateStringBuffer cpptemplate::FrameManager::getFramerateCString() const noexcept
+utils::FrameManager::FramerateStringBuffer utils::FrameManager::getFramerateCString() const noexcept
 {
     FramerateStringBuffer buffer{};
 
@@ -61,12 +61,12 @@ cpptemplate::FrameManager::FramerateStringBuffer cpptemplate::FrameManager::getF
     return buffer;
 }
 
-std::string cpptemplate::FrameManager::getFramerateString() const noexcept
+std::string utils::FrameManager::getFramerateString() const noexcept
 {
     return std::string{getFramerateCString().data()};
 }
 
-std::ostream& operator<<(std::ostream& os, const cpptemplate::FrameManager& frameManager)
+std::ostream& operator<<(std::ostream& os, const utils::FrameManager& frameManager)
 {
     return os << frameManager.getFPS() << " fps";
 }

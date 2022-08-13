@@ -19,15 +19,15 @@
 
 #pragma once
 
+#include <utils/Time.hpp>
+
 #include <array>
 #include <chrono>
 #include <functional>
 #include <optional>
 #include <string>
 
-#include "lib/Time.hpp"
-
-namespace cpptemplate {
+namespace utils {
 class FrameManager final
 {
 public:
@@ -56,6 +56,6 @@ private:
 
     std::optional<OnSecondCallback> m_onSecondCallback{std::nullopt};
 };
-}  // namespace cpptemplate
+}  // namespace utils
 
-std::ostream& operator<<(std::ostream& os, const cpptemplate::FrameManager& frameManager);
+std::ostream& operator<<(std::ostream& os, const utils::FrameManager& frameManager);
