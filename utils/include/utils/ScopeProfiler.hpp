@@ -17,19 +17,39 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-#include <utils/ScopedProfiler.hpp>
+#pragma once
 
-#include <iostream>
+#include <utils/Macros.hpp>
+#include <utils/Time.hpp>
 
-utils::ScopedProfiler::ScopedProfiler(const char* name) noexcept : m_start{Clock::now()}, m_name{name}
+#include <chrono>
+#include <utility>
+
+namespace utils {
+/**
+ * Profile code inside a scope.
+ * Intended to be used with the `UTILS_WITH_SCOPE_PROFILER` macro.
+ */
+class ScopeProfiler final
 {
-}
+public:
+    explicit ScopeProfiler(const char* name) noexcept;
+    ~ScopeProfiler();
 
-utils::ScopedProfiler::~ScopedProfiler()
-{
-    const auto end = Clock::now();
-    const DurationSeconds durationSeconds = end - m_start;
-    const DurationMillis durationMillis = durationSeconds;
+    ScopeProfiler(ScopeProfiler&&) = delete;
+    ScopeProfiler(const ScopeProfiler&) = delete;
+    ScopeProfiler& operator=(ScopeProfiler&&) = delete;
+    ScopeProfiler& operator=(const ScopeProfiler&) = delete;
 
-    std::cerr << m_name << " => " << durationMillis.count() << "ms" << '\n';
-}
+private:
+    const TimePoint m_start;
+    const char* const m_name;
+};
+}  // namespace utils
+
+#if UTILS_WITH_SCOPE_PROFILER
+    #define UTILS_SCOPE_PROFILER(x) \
+        [[maybe_unused]] const utils::ScopeProfiler UTILS_STRCAT(_SCOPE_PROFILER_, __COUNTER__)(x)
+#else
+    #define UTILS_SCOPE_PROFILER(x) (void) 0
+#endif

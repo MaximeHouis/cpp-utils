@@ -3,8 +3,9 @@ add_library(
         include/utils/ClassUtils.hpp
         include/utils/Macros.hpp
         include/utils/Time.hpp
+        include/utils/ScopeExit.hpp
         src/FrameManager.cpp include/utils/FrameManager.hpp
-        src/ScopedProfiler.cpp include/utils/ScopedProfiler.hpp
+        src/ScopeProfiler.cpp include/utils/ScopeProfiler.hpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE include)

@@ -17,20 +17,19 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-#include <utils/ClassUtils.hpp>
-#include <utils/ScopeExit.hpp>
 #include <utils/ScopeProfiler.hpp>
 
 #include <iostream>
 
-int main()
+utils::ScopeProfiler::ScopeProfiler(const char* name) noexcept : m_start{Clock::now()}, m_name{name}
 {
-    UTILS_SCOPE_PROFILER("main()");
+}
 
-    ON_SCOPE_EXIT
-    {
-        std::cout << "Bye bye!\n";
-    };
+utils::ScopeProfiler::~ScopeProfiler()
+{
+    const auto end = Clock::now();
+    const DurationSeconds durationSeconds = end - m_start;
+    const DurationMillis durationMillis = durationSeconds;
 
-    std::cout << "Hello world!\n";
+    std::cerr << m_name << " => " << durationMillis.count() << "ms" << '\n';
 }

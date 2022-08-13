@@ -24,7 +24,6 @@
 #include <optional>
 
 namespace utils {
-
 struct NotCopyable
 {
     NotCopyable() = default;
@@ -49,39 +48,4 @@ struct NotMovable
  */
 template<typename T>
 class [[maybe_unused]] TypeChecker;
-
-/**
- * Run a functor when on scope exit.
- * Intended to be used with the `ON_SCOPE_EXIT` macro.
- * @tparam Func
- */
-template<typename Func>
-class ScopeExitFunctor final
-{
-public:
-    explicit ScopeExitFunctor(Func&& func) : m_func{std::move(func)} {}
-    ~ScopeExitFunctor() { m_func(); }
-
-private:
-    Func m_func;
-};
-
-namespace detail {
-    struct ScopeExitHelper final
-    {
-        template<typename Func>
-        ScopeExitFunctor<Func> operator+(Func&& func) noexcept
-        {
-            return ScopeExitFunctor<Func>{std::forward<Func>(func)};
-        }
-    };
-}  // namespace detail
-
-/**
- * Executes a lambda when the scope exits.
- */
-#define ON_SCOPE_EXIT                                                           \
-    const auto& UTILS_STRCAT(_SCOPE_EXIT_FUNC_, __COUNTER__) [[maybe_unused]] = \
-      utils::detail::ScopeExitHelper{} + [&]()  // NOLINT(bugprone-macro-parentheses)
-
 }  // namespace utils
