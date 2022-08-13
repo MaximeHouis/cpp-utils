@@ -17,6 +17,7 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
+#include <utils/ClassUtils.hpp>
 #include <utils/ScopedProfiler.hpp>
 
 #include <iostream>
@@ -24,6 +25,11 @@
 int main()
 {
     UTILS_SCOPED_PROFILER("main()");
+
+    ON_SCOPE_EXIT
+    {
+        std::cout << "Bye bye!\n";
+    };
 
     std::cout << "Hello world!\n";
 }
