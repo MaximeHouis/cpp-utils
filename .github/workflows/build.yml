@@ -1,0 +1,67 @@
+name: C++ Cross-Platform Build
+
+on: push
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+
+  # template: remove if not using clang-format
+  clang-format-check:
+    name: clang-format check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run clang-format
+        uses: jidicula/clang-format-action@v4.6.2
+        with:
+          clang-format-version: '14'
+
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-22.04, macos-12, windows-2022 ]
+        mode: [ "Debug", "Release" ]
+        # cppstd: [ 17, 20 ] # template: enable if multiple std version testing is wanted
+        include:
+          - os: ubuntu-22.04
+            #cxx-override: CC=gcc-10 CXX=g++-10
+          - os: macos-12
+          - os: windows-2022
+            pdb-path: ./build/*.pdb
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      # template: uncomment if using std::execution stuff for gcc or clang
+      #      - name: apt dependencies
+      #        run: sudo apt update && sudo apt install -y --no-install-recommends libtbb-dev
+      #        if: startsWith(matrix.os, 'ubuntu')
+
+      # template: add -DCMAKE_CXX_STANDARD=${{ matrix.cppstd }} to cmake command if multiple std version testing is wanted
+      - name: Configure
+        run: |
+          mkdir build
+          cd build
+          ${{ matrix.cxx-override }} \
+          cmake -DCMAKE_BUILD_TYPE=${{ matrix.mode }} ..
+
+      - name: Build
+        working-directory: build
+        run: cmake --build . --config ${{ matrix.mode }}
+
+      # template: uncomment and fill paths to upload useful binaries or other files as artifacts
+  #      - name: Upload Artifacts
+  #        uses: actions/upload-artifact@v2
+  #        with:
+  #          name: ${{ runner.os }}-${{ matrix.mode }}.zip
+  #          path: |
+  #            ${{ matrix.pdb-path }}
+  #          if-no-files-found: warn
+  #          retention-days: 30
