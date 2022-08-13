@@ -34,6 +34,12 @@ TEST(Macros, ScopeExit)
     static const std::string bye = "Bye bye!\n";
 
     testing::internal::CaptureStdout();
+
+    ON_SCOPE_EXIT
+    {
+        std::cout << "Should not be captured!\n";
+    };
+
     {
         ON_SCOPE_EXIT
         {
