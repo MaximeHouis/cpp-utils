@@ -30,4 +30,7 @@ if (${CMAKE_BUILD_TYPE} MATCHES "Release" AND ${${PROJECT_PREFIX}_ENABLE_IPO})
 endif ()
 
 add_subdirectory(utils)
-add_subdirectory(app)
+
+if (${PROJECT_PREFIX}_BUILD_TESTS)
+    add_subdirectory(tests)
+endif ()

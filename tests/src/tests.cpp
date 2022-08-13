@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2022 [fill name later]
+ * Copyright (c) 2021-2021 [fill name later]
  *
  * This software is provided "as-is", without any express or implied warranty. In no event
  *     will the authors be held liable for any damages arising from the use of this software.
@@ -17,4 +17,31 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-#pragma once
+#include <gtest/gtest.h>
+
+#include "utils/Macros.hpp"
+#include "utils/ScopeExit.hpp"
+
+TEST(Macros, StringMacros)
+{
+    EXPECT_STREQ("HelloWorld", UTILS_STR(HelloWorld));
+    EXPECT_STREQ("HelloWorld", UTILS_STR(UTILS_STRCAT(Hello, World)));
+}
+
+TEST(Macros, ScopeExit)
+{
+    static const std::string hey = "Hello world!\n";
+    static const std::string bye = "Bye bye!\n";
+
+    testing::internal::CaptureStdout();
+    {
+        ON_SCOPE_EXIT
+        {
+            std::cout << bye;
+        };
+        std::cout << hey;
+    }
+    const auto& strStdout = testing::internal::GetCapturedStdout();
+
+    ASSERT_EQ(strStdout, hey + bye);
+}
