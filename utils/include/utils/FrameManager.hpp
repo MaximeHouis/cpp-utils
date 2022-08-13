@@ -28,6 +28,11 @@
 #include <string>
 
 namespace utils {
+/**
+ * Frame manager utility class.
+ * Useful for 2D or 3D graphic applications.
+ * Manages the frame time and also a FPS counter.
+ */
 class FrameManager final
 {
 public:

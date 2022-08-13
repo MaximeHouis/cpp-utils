@@ -26,6 +26,10 @@
 #include <utility>
 
 namespace utils {
+/**
+ * Profile code inside a scope.
+ * Intended to be used with the `UTILS_WITH_SCOPED_PROFILER` macro.
+ */
 class ScopedProfiler final
 {
 public:
