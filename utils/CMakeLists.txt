@@ -1,5 +1,5 @@
 add_library(
-        ${PROJECT_NAME} STATIC
+        cpp-utils STATIC
         include/utils/ClassUtils.hpp
         include/utils/Macros.hpp
         include/utils/Time.hpp
@@ -8,5 +8,5 @@ add_library(
         src/ScopeProfiler.cpp include/utils/ScopeProfiler.hpp
 )
 
-target_include_directories(${PROJECT_NAME} PRIVATE include)
-target_compile_options(${PROJECT_NAME} PRIVATE ${PROJECT_WARNINGS})
+target_include_directories(cpp-utils PRIVATE include)
+target_compile_options(cpp-utils PRIVATE ${PROJECT_WARNINGS})
