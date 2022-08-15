@@ -58,6 +58,13 @@
     #define UTILS_EXEC_UNSEQ
 #endif
 
+#if defined(__cpp_multidimensional_subscript)
+    #define UTILS_HAS_MULTIDIMENSIONAL_SUBSCRIPT 1
+#else
+    #define UTILS_HAS_MULTIDIMENSIONAL_SUBSCRIPT 0
+#endif
+
 namespace utils::features {
 static constexpr bool execution_policies = UTILS_HAS_EXECUTION_POLICIES;
-}
+static constexpr bool multidimensional_subscript = UTILS_HAS_MULTIDIMENSIONAL_SUBSCRIPT;
+}  // namespace utils::features

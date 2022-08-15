@@ -7,7 +7,8 @@ enable_testing()
 
 add_executable(
         ${PROJECT_NAME}-tests
-        src/tests.cpp
+        src/TestsMacros.cpp
+        src/TestsMath.cpp
 )
 target_compile_options(${PROJECT_NAME}-tests PRIVATE ${PROJECT_WARNINGS})
 target_link_libraries(${PROJECT_NAME}-tests ${PROJECT_NAME} gtest_main)
