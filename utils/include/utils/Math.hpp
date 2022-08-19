@@ -20,7 +20,6 @@
 #pragma once
 
 #include <algorithm>
-#include <limits>
 #include <utility>
 
 namespace utils {
@@ -61,7 +60,7 @@ struct Math
     }
 
     template<std::floating_point T>
-    [[nodiscard]] static constexpr bool nearlyEqual(T a, T b, T tolerance = std::numeric_limits<T>::epsilon()) noexcept
+    [[nodiscard]] static constexpr bool nearlyEqual(T a, T b, T tolerance = 0.0001) noexcept
     {
         return std::abs(a - b) <= tolerance;
     }
