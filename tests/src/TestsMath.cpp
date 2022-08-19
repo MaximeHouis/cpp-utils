@@ -44,5 +44,5 @@ TEST(Math, NearlyEqual)
     EXPECT_TRUE(Math::nearlyEqual(100.0, 101.0, 1.0));
 
     EXPECT_FALSE(Math::nearlyEqual(100.0, 101.0));
-    EXPECT_FALSE(Math::nearlyEqual(100.0, 100.0000042));
+    EXPECT_FALSE(Math::nearlyEqual(100.0, 100.042));
 }
