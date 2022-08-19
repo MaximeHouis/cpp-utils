@@ -60,7 +60,7 @@ struct Math
     }
 
     template<std::floating_point T>
-    [[nodiscard]] static constexpr bool nearlyEqual(T a, T b, T tolerance = 0.0001) noexcept
+    [[nodiscard]] static constexpr bool nearlyEqual(T a, T b, T tolerance = static_cast<T>(0.0001)) noexcept
     {
         return std::abs(a - b) <= tolerance;
     }
