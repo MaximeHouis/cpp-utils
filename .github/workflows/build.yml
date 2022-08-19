@@ -55,4 +55,4 @@ jobs:
       - name: Run tests
         if: ${{ matrix.mode == 'Debug' }}
         working-directory: build/tests
-        run: ctest
+        run: ctest --output-on-failure
